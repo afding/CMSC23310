@@ -1,0 +1,1 @@
+datatype message = PROPOSE | PREPARE | PROMISE | ACCEPT | ACCEPTED | REJECTED
