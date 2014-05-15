@@ -1,5 +1,6 @@
 import sys
 import getopt
+
 import event
 
 def read(fname):
@@ -35,14 +36,14 @@ def read(fname):
                 raise ValueError("my_read_in: Invalid Action")
             es.append(e)
         fs = event.shrink(es)
-        return fs
+        return (np, na, tmax, fs)
 
 def main(argv=None):
     if argv is None:
         argv = sys.argv
     fname = argv[1]
     es = read(fname)
-    for e in es:
+    for e in es[3]:
         print repr(e)
     
 if __name__ == "__main__":

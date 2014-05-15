@@ -2,9 +2,9 @@ def trans_label(l):
     if l is None:
         return "   "
     if l > 0:
-        return " P%s" % str(label)
+        return " P%s" % str(l)
     else:
-        return " A%s" % str(-label)
+        return " A%s" % str(-l)
 
 def trans_prop(pid, val):
     if pid is None and val is None:
@@ -21,7 +21,7 @@ def trans_prior_prop(pid, val):
     if pid is None and val is None:
         return " (Prior: None)"
     else:
-        return " (Prior: n=%s, v=%s)" % (pid, val)
+        return " (Prior: n=%s, v=%s)" % (str(pid), str(val))
 
 class Message:
 
@@ -35,15 +35,15 @@ class Message:
         self.old_val = old_val
 
     def __repr__(self):
-        return "Event(typ=%r,src=%r,dst=%r,pid=%r,val=%r,old_pid=%r,old_val=%r)" % (self.typ,self.src,self.dst,self.pid,self.val,self.old_pid,self.old_val)
+        return "Message(typ=%r,src=%r,dst=%r,pid=%r,val=%r,old_pid=%r,old_val=%r)" % (self.typ,self.src,self.dst,self.pid,self.val,self.old_pid,self.old_val)
 
     def __str__(self):
         if self.typ == "PROMISE":
             pp = trans_prior_prop(self.old_pid, self.old_val)
         else:
             pp = ""
-            return "%s ->%s  %s%s%s" % (trans_label(self.src),
-                                        trans_label(self.dst),
-                                        self.typ,
-                                        trans_prop(self.pid, self.val),
-                                        pp)
+        return "%s ->%s  %s%s%s" % (trans_label(self.src),
+                                    trans_label(self.dst),
+                                    self.typ,
+                                    trans_prop(self.pid, self.val),
+                                    pp)
