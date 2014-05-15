@@ -88,8 +88,7 @@ def simulate(np, na, tmax, E):
 def main(argv=None):
     if argv is None:
         argv = sys.argv
-    fname = argv[1]
-    np, na, tmax, E = read_in.read(fname)
+    np, na, tmax, E = read_in.read()
     simulate(np, na, tmax, E)
 
 if __name__ == "__main__":
