@@ -1,6 +1,6 @@
 def trans_label(l):
     if l is None:
-        return "  "
+        return "   "
     if l > 0:
         return " P%s" % str(l)
     else:

@@ -47,7 +47,7 @@ def simulate(np, na, tmax, E):
                 m = message.Message("PROPOSE", None, e.pic, None, e.piv, None, None)
                 # PRINTING!!!
                 line_printed = True
-                print "%s: %s" % (i2, str(m))
+                print "%s:%s" % (i2, str(m))
                 deliver.deliver(prop_c, m, N, P, A)
             else:
                 m = N.extract(P, A)
@@ -60,7 +60,9 @@ def simulate(np, na, tmax, E):
                 else:
                     # No messages delivered this time-step.
                     # Check line_printed to see if we need placeholder.
-                    if line_printed:
+                    if not line_printed:
+                        # PRINTING!!!
+                        line_printed = True
                         print "%s:" % i2
         else:
             # Nothing was extracted from list of events E. Goto N.
@@ -74,7 +76,9 @@ def simulate(np, na, tmax, E):
             else:
                 # No messages delivered this time-step.
                 # Check line_printed to see if we need placeholder.
-                if line_printed:
+                if not line_printed:
+                    # PRINTING!!!
+                    line_prtined = True
                     print "%s:" % i2
             #print "NETWORK STATUS: %r" % repr(N)
     print ""

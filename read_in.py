@@ -10,7 +10,7 @@ def read(fname):
         for line in f:
             if line == "0 END\n":
                 break;
-            if line[0] == '#' or line[0] == "\n":
+            if line[0] == '#' or line.isspace():
                 continue;
             if is_init == False:
                 np, na, tmax = map((lambda x: int(x)), line.split())

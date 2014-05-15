@@ -72,9 +72,9 @@ def deliver_proposer(c, m, N, A):
             # Try again with new pid.
             c.pid = N.get_pid()
             for a in A:
-                to_send = Message.message("PREPARE", c.label, a.label, c.pid,
+                to_send = message.Message("PREPARE", c.label, a.label, c.pid,
                                           None, None, None)
-                N.Network.enqueue(to_send)
+                N.enqueue(to_send)
             c.state = "P_wait_promise"
             return
     else: # c.state = "P_final":
