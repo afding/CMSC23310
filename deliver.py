@@ -33,7 +33,7 @@ def deliver_proposer(c, m, N, A):
             c.value = m.val
         for a in A:
             to_send = message.Message("PREPARE", c.label, a.label, c.pid,
-                                      c.value, None, None)
+                                      None, None, None)
             N.enqueue(to_send)
         c.state = "P_wait_promise"
         return
