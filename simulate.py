@@ -21,7 +21,7 @@ def simulate(np, na, tmax, E):
         i2 = str(i).rjust(3)
         #print "TICK TOCK: %r" % str(i)
         if len(N.mlist) == 0 and len(E) == 0:
-            return
+            break;
         # Process the event for this tick (if any).
         e = next((x for x in E if x.t == i), None)
         if e is not None:
@@ -51,6 +51,7 @@ def simulate(np, na, tmax, E):
                     # No messages delivered this time-step.
                     print "%s:" % i2
         else:
+            # Nothing was extracted from list of events E. Goto N.
             m = N.extract(P, A)
             if m is not None:
                 # PRINTING!!!
@@ -60,7 +61,10 @@ def simulate(np, na, tmax, E):
             else:
                 # No messages delivered this time-step.
                 print "%s:" % i2
-        #print "NETWORK STATUS: %r" % repr(N)
+            #print "NETWORK STATUS: %r" % repr(N)
+    print ""
+    for p in P:
+        print p.consensus
 
 def main(argv=None):
     if argv is None:

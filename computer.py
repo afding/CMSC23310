@@ -20,14 +20,16 @@ class Computer:
             self.state = "P_init"
             self.pid = -1
             self.value = None
+            self.consensus = "P%r did not reach consensus" % label
         else: # Acceptor
             self.state = "A"
             self.pid = -1
             self.value = None
+            self.consensus = ""
         self.mlist = []
         self.old_pid = None
         self.old_val = None
 
     def __repr__(self):
-        return "Computer(label=%r,role=%r,failed=%r,state=%r,pid=%r,value=%r,mlist=%r,old_pid=%r,old_val=%r)" % (self.label,self.role,self.failed,self.state,self.pid,self.value,self.mlist,self.old_pid,self.old_val)
+        return "Computer(label=%r,role=%r,failed=%r,state=%r,pid=%r,value=%r,mlist=%r,old_pid=%r,old_val=%r,consensus=%r)" % (self.label,self.role,self.failed,self.state,self.pid,self.value,self.mlist,self.old_pid,self.old_val,self.consensus)
 

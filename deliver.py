@@ -15,7 +15,8 @@ def new_prop_value(mlist, v):
     max_old_pid = -1
     assoc_old_value = -1
     for m in mlist:
-        if m.pid > max_old_pid:
+        # Takes advantage of None > n is False for any n.
+        if m.old_pid > max_old_pid:
             max_old_pid = m.old_pid
             assoc_old_value = m.old_val
     if max_old_pid == -1:
@@ -56,14 +57,16 @@ def deliver_proposer(c, m, N, A):
             return
 
     # Now to wait for a majority of ACCEPTED or REJECTED messages.
-    elif c.state == "P_wait_accept":
+    elif c.state == "P_wait_accepted":
         c.mlist.append(m)
         if not is_majority(c.mlist, len(A), "REJECTED", c.pid):
             if not is_majority(c.mlist, len(A), "ACCEPTED", c.pid):
                 return
             else:
-                # TODO: Somehow mark that consensus was reached.
-                c.role = "P_final"
+                # Assuming m is part of the majority, since a
+                # majority only happened once m was in the list.
+                c.consensus = "P%r has reached consensus (proposed %r, accepted %r)" % (c.label, c.value, m.val)
+                c.state = "P_final"
                 return
         else:
             # Try again with new pid.
